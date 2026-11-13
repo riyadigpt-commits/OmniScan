@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="row align-items-center justify-content-center text-center mb-5">
+    <div class="col-lg-8">
+        <div class="mb-4 text-primary hero-icon">
+            <i class="fa-solid fa-qrcode"></i>
+        </div>
+        <h1 class="display-4 fw-bold mb-3">Selamat datang di OmniScan</h1>
+        <p class="lead text-body-secondary mb-4">
+            Platform serba guna untuk memindai, membaca, dan membuat Barcode serta QR Code dengan cepat. Semua riwayat tersimpan rapi dan dapat diekspor.
+        </p>
+    </div>
+</div>
+
+<!-- Quick Action Cards (Menu Fitur) -->
+<div class="row g-4 justify-content-center">
+    
+    <!-- Kartu Scanner -->
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 bg-body-tertiary text-center p-4 transition-hover">
+            <div class="card-body">
+                <i class="fa-solid fa-camera fa-3x text-success mb-3"></i>
+                <h4 class="card-title fw-bold">Scan Kode</h4>
+                <p class="card-text text-muted">Pindai QR atau Barcode langsung lewat kamera perangkatmu atau upload gambar kode dari galeri.</p>
+                <a href="{{ url_for('scan') }}" class="btn btn-success w-100 mt-3 rounded-pill">
+                    Buka Scanner <i class="fa-solid fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kartu Generator -->
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 bg-body-tertiary text-center p-4 transition-hover">
+            <div class="card-body">
+                <i class="fa-solid fa-wand-magic-sparkles fa-3x text-primary mb-3"></i>
+                <h4 class="card-title fw-bold">Buat QR Code</h4>
+                <p class="card-text text-muted">Ubah tautan (URL), teks, atau bahkan unggah file (PDF/Gambar) untuk dijadikan QR Code yang bisa dibagikan.</p>
+                <a href="{{ url_for('generate') }}" class="btn btn-primary w-100 mt-3 rounded-pill">
+                    Buat Sekarang <i class="fa-solid fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kartu Riwayat -->
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 bg-body-tertiary text-center p-4 transition-hover">
+            <div class="card-body">
+                <i class="fa-solid fa-clock-rotate-left fa-3x text-info mb-3"></i>
+                <h4 class="card-title fw-bold">Riwayat</h4>
+                <p class="card-text text-muted">Lihat kembali seluruh data yang pernah kamu scan. Ekspor datanya ke dalam format CSV/Excel.</p>
+                <a href="{{ url_for('history') }}" class="btn btn-info text-white w-100 mt-3 rounded-pill">
+                    Lihat Riwayat <i class="fa-solid fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

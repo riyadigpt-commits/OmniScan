@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Riwayat Pemindaian{% endblock %}
+
+{% block content %}
+<div class="row mb-4 align-items-center">
+    <div class="col-md-8 col-sm-12 mb-3 mb-md-0">
+        <h2 class="fw-bold mb-0">
+            <i class="fa-solid fa-clock-rotate-left text-info me-2"></i>Riwayat Pemindaian
+        </h2>
+        <p class="text-muted mt-1 mb-0">Daftar semua Barcode dan QR Code yang pernah kamu pindai.</p>
+    </div>
+    <div class="col-md-4 col-sm-12 text-md-end">
+        <!-- Tombol Ekspor CSV memanggil fungsi export_history di app.py -->
+        <a href="{{ url_for('export_history') }}" class="btn btn-success rounded-pill shadow-sm">
+            <i class="fa-solid fa-file-csv me-2"></i>Ekspor ke CSV
+        </a>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 bg-body-tertiary">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col" class="ps-4 history-col-number">#</th>
+                        <th scope="col" class="history-col-time">Waktu Pemindaian</th>
+                        <th scope="col" class="history-col-type">Tipe Kode</th>
+                        <th scope="col" class="history-col-result">Hasil / Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Perulangan Jinja2 untuk menampilkan data dari database -->
+                    {% for record in records %}
+                    <tr>
+                        <th scope="row" class="ps-4">{{ loop.index }}</th>
+                        <td>
+                            <i class="fa-regular fa-calendar me-1 text-muted"></i> 
+                            <!-- Format waktu ke format yang lebih mudah dibaca (DD-MM-YYYY HH:MM) -->
+                            {{ record.timestamp.strftime('%d-%m-%Y %H:%M') }}
+                        </td>
+                        <td>
+                            <span class="badge bg-secondary">{{ record.scan_type }}</span>
+                        </td>
+                        <td class="text-break result-text">
+                            {{ record.data_result }}
+                        </td>
+                    </tr>
+                    <!-- Jika tabel di database masih kosong, tampilkan pesan ini -->
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center py-5">
+                            <i class="fa-solid fa-box-open fa-4x text-muted opacity-50 mb-3"></i>
+                            <h5 class="text-muted">Belum ada riwayat pemindaian.</h5>
+                            <p class="text-muted small">Coba pindai kode pertamamu di halaman Scanner.</p>
+                            <a href="{{ url_for('scan') }}" class="btn btn-outline-primary rounded-pill mt-2">Mulai Memindai</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
